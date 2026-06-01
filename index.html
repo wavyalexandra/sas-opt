@@ -732,10 +732,17 @@ function submitOrder() {
   if (!company || !contact || !messenger) { alert("Заполните обязательные поля"); return; }
 
   // Формируем сообщение для Телеграм
+  var phone = document.getElementById("phone").value.trim();
+  var address = document.getElementById("address").value.trim();
+  var comment = document.getElementById("comment").value.trim();
+
   var lines = ["🛒 *Новый заказ SAS*", ""];
   lines.push("🏢 *Компания:* " + company);
   lines.push("👤 *Контакт:* " + contact);
-  lines.push("💬 *Мессенджер:* " + messenger);
+  if (phone) lines.push("📞 *Телефон:* " + phone);
+  lines.push("💬 *Telegram/Email:* " + messenger);
+  if (address) lines.push("📍 *Адрес доставки:* " + address);
+  if (comment) lines.push("💭 *Комментарий:* " + comment);
   lines.push("");
   lines.push("📦 *Товары:*");
   var total = 0;
